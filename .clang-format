@@ -1,0 +1,30 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+
+Language: Cpp
+
+# Force pointers to the type
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+ColumnLimit: 80
+
+# remove access modifiers indent: public, private, protected
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+
+IndentCaseLabels: true
+IndentCaseBlocks: true
+
+# Brace in new line
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterEnum: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterClass: false
+  AfterControlStatement: true
+  AfterFunction: true
+  AfterNamespace: false
+  BeforeCatch: false
+  BeforeElse: true
