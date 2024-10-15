@@ -1,5 +1,7 @@
-#include <iostream>
 #include <filesystem>
+#include <iostream>
+
+#include "vo.h"
 
 int main(int argc, char* argv[])
 {
@@ -11,10 +13,17 @@ int main(int argc, char* argv[])
 
     std::cout << "Visual Odometry\n";
 
-    // std::filesystem::path dataset_path = std::filesystem::current_path() / "kitty_dataset" / "data_odometry_gray";
+    VisualOdometry vo;
 
-    std::filesystem::path dataset_path = argv[1];
-    std::cout << dataset_path << "\n";
+    // std::filesystem::path dataset_path = std::filesystem::current_path() /
+    // "kitty_dataset" / "data_odometry_gray";
 
-    return 0;
+    std::filesystem::path datasetPath = argv[1];
+    // std::cout << dataset_path << "\n";
+
+    std::filesystem::path imagesetPath = datasetPath / "data_odometry_gray/dataset/sequences/00";
+
+    int ret = vo.run(imagesetPath.string());
+
+    return ret;
 }
