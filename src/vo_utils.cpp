@@ -1,21 +1,20 @@
 #include "vo_utils.h"
-#include "opencv2/core/types.hpp"
 
-#include <opencv2/video/tracking.hpp>
-#include <opencv2/highgui/highgui.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/video/tracking.hpp>
 
 #include <filesystem>
 #include <fstream>
 #include <iterator>
-#include <sstream>
-#include <string>
+#include <iostream>
 
 /* Load these values from Kitty's calibration files */
-void getCalibrationData(std::string datasetPath, double& focal, cv::Point2d& pp)
+void getCalibrationData(std::string imagesetPath, double& focal,
+                        cv::Point2d& pp)
 {
-    std::filesystem::path calibrationFilePath = datasetPath;
-    calibrationFilePath /= "calib.txt";
+    std::filesystem::path calibrationFilePath =
+        std::filesystem::path(imagesetPath) / "calib.txt";
 
     std::ifstream myFile(calibrationFilePath);
 
@@ -67,13 +66,13 @@ void featureTracking(cv::Mat img1, cv::Mat img2,
             }
 
             points1.erase(points1.begin() + (i - indexCorrection));
-            points1.erase(points2.begin() + (i - indexCorrection));
+            points2.erase(points2.begin() + (i - indexCorrection));
             indexCorrection++;
         }
     }
 }
 
-void featureDetection(cv::Mat img, std::vector<cv::Point2f>& points) 
+void featureDetection(cv::Mat img, std::vector<cv::Point2f>& points)
 {
     /* Uses FAST for feature detection */
     std::vector<cv::KeyPoint> keypoints;
